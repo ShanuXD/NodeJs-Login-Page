@@ -3,8 +3,12 @@ const app = express()
 const mongoose = require("mongoose")
 const allRoutes = require("./routes/index")
 const session = require('express-session')
+const dotenv = require("dotenv")
+dotenv.config()
 
-mongoose.connect('mongodb://localhost/NodeUsers', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
+const URL = process.env.DATABASE_URL
+const LocalDB = 'mongodb://localhost/NodeUsers'
+mongoose.connect(URL, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
 .then(()=>console.log("connected to db!"))
 .catch((err)=>console.log(err));
 app.set("view engine", "ejs");
