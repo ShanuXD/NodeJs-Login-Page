@@ -26,7 +26,7 @@ router.post("/", async (req,res)=>{
                 return res.render("signin", {err:"Incorrect Password"})
             }
             req.session.user = user; 
-            res.redirect("admin")
+            return res.redirect("admin")
         }
         // User
         else{
@@ -34,7 +34,7 @@ router.post("/", async (req,res)=>{
                 return res.render("signin", {err:"Incorrect Password"})
             }
             req.session.user = user; 
-            res.redirect("home")
+            return  res.redirect("home")
 
         }
 
@@ -84,12 +84,12 @@ router.get("/signout", (req,res)=>{
 })
 
 router.get("/admin", (req,res)=>{
-    if(req.session.user){
-        const user = req.session.user;
-        if(user.email != adminEmail) return res.redirect("home")
-        return res.redirect("admin")
-    }
+    const user = req.session.user;
+    console.log(user)
+    if(user==undefined) return  res.redirect("/")
+    if(user.email != adminEmail) return res.redirect("home")
     res.render("admin")
+
 })
 
 
