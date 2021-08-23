@@ -23,7 +23,7 @@ app.use(session(
     }))
 
 app.use("/", allRoutes)
-app.listen(3000, ()=>console.log("Server is Running..."))
+app.listen(process.env.PORT || 3000, ()=>console.log("Server is Running..."))
 
 
 // 1. Implement Sign Up:
